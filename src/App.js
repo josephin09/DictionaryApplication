@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 
 const App = () => {
-  // Initializing the dictionary state
   const [dictionary, setDictionary] = useState([
     { word: "React", meaning: "A JavaScript library for building user interfaces." },
     { word: "Component", meaning: "A reusable building block in React." },
@@ -17,7 +16,9 @@ const App = () => {
     const lowercaseTerm = searchTerm.toLowerCase();
     const foundWord = dictionary.find((entry) => entry.word.toLowerCase() === lowercaseTerm);
 
-    if (foundWord) {
+    if (searchTerm.trim() === "") {
+      setSearchResult("Definition: Please enter a search term.");
+    } else if (foundWord) {
       setSearchResult(`Definition: ${foundWord.meaning}`);
     } else {
       setSearchResult("Definition: Word not found in the dictionary.");
@@ -27,16 +28,18 @@ const App = () => {
   return (
     <div>
       <h1>Dictionary App</h1>
+      <label>
+        Search for a word:
         <input
           type="text"
-          placeholder="Search for a word..."
+          placeholder="Enter a word..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
+      </label>
       <button onClick={handleSearch}>Search</button>
       <p>{searchResult}</p>
     </div>
   );
 };
-
 export default App;
