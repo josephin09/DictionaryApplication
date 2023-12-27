@@ -28,15 +28,12 @@ const App = () => {
   return (
     <div>
       <h1>Dictionary App</h1>
-      <label>
-        Search for a word:
         <input
           type="text"
-          placeholder="Enter a word..."
+          placeholder="Search for a word..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-      </label>
       <button onClick={handleSearch}>Search</button>
       <p>{searchResult}</p>
     </div>
