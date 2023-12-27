@@ -1,42 +1,48 @@
 import React, { useState } from "react";
 
-const App = () => {
+function App() {
+  // Define a dictionary using state
   const [dictionary, setDictionary] = useState([
     { word: "React", meaning: "A JavaScript library for building user interfaces." },
     { word: "Component", meaning: "A reusable building block in React." },
     { word: "State", meaning: "An object that stores data for a component." },
+    // Add more words and meanings as needed
   ]);
 
-  // State for user input and search result
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchResult, setSearchResult] = useState("Definition: "); // Initial stage text
+  const [searchResult, setSearchResult] = useState("");
 
-  // Function to handle search
+  // Function to handle word search
   const handleSearch = () => {
-    const lowercaseTerm = searchTerm.toLowerCase();
-    const foundWord = dictionary.find((entry) => entry.word.toLowerCase() === lowercaseTerm);
-
-    if (searchTerm.trim() === "") {
-      setSearchResult("Definition: Please enter a search term.");
-    } else if (foundWord) {
-      setSearchResult(`Definition: ${foundWord.meaning}`);
+    const foundWord = dictionary.find(
+      (entry) => entry.word.toLowerCase() === searchTerm.toLowerCase()
+    );
+    if (foundWord) {
+      setSearchResult(foundWord.meaning);
     } else {
-      setSearchResult("Definition: Word not found in the dictionary.");
+      setSearchResult("Word not found in the dictionary.");
     }
   };
 
   return (
     <div>
       <h1>Dictionary App</h1>
+      <div>
         <input
           type="text"
           placeholder="Search for a word..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-      <button onClick={handleSearch}>Search</button>
-      <p>{searchResult}</p>
+        <button onClick={handleSearch}>Search</button>
+      </div>
+      <div>
+        <strong>Definition:</strong>
+        <p>{searchResult}</p>
+      </div>
     </div>
   );
-};
+}
+
 export default App;
+
